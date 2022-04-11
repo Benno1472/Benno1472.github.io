@@ -10,5 +10,13 @@
     * rotates at a slightly different speed
 
 #### About Me Page
+* fireworks simulation, when a firework explodes a box fades in where in explodes and shows a little fact about me (persistent throughout the simulation)
+* fireworks can't explode in the same place
+* option to show all facts
 
 #### Projects Page
+* boids simulation where each boid links to a specific project
+* fairly slow movement and/or a pause button
+
+###### Tools
+* Use `P5.js` for creating the simulations
