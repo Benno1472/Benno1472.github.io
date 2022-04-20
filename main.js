@@ -1,6 +1,3 @@
-// Website Fireworks By Ben Leszczynski
-// Firework Simulation That Displays Facts About Me
-
 // reduce canvas size so no scrollbar appears
 let windowXOffset = 17, windowYOffset = 21;
 
@@ -28,8 +25,6 @@ function setup() {
 
     // calculate where each tile should be on screen
     calculateTiles(rows, columns);
-
-    console.log(facts);
 }
 
 function draw() {
