@@ -9,7 +9,7 @@
     * is a clickable object that redirects the user to another page
     * rotates at a slightly different speed
 
-#### About Me Page
+#### About Me Page - primary test successful, TODO: display facts
 * fireworks simulation, when a firework explodes a box fades in where in explodes and shows a little fact about me (persistent throughout the simulation)
 * fireworks can't explode in the same place
 * option to show all facts
