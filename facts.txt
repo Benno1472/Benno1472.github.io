@@ -1,16 +1,31 @@
-Fact 1
-Fact 2
-Fact 3
-Fact 4
-Fact 5
-Fact 6
-Fact 7
-Fact 8
-Fact 9
-Fact 10
-Fact 11
-Fact 12
-Fact 13
-Fact 14
-Fact 15
-Fact 16
+My name is Benjamin Leszczynski, I'm 19 years old and enjoy programming, learning about orbital mechanics and spaceflight, watching animated movies and working-on/driving my Subaru.
+
+I'm knowledgable in several programming languages including Python, Javascript, Java and C. Recently I've been learning about Database Management Systems and experimenting with SQlite aswell as MongoDB.
+
+I'm currently attending the university of alberta and am working towards getting my degree in computing science.
+
+I like to creatively code and work on fun projects, Daniel Shiffman has been a huge inspiration for me.
+
+One of my favourite programming projects I made in highschool was a chrome extension that allowed users to draw ontop of websites with their mouse.
+
+I have an old right-hand-drive Subaru imported from Japan which breaks down a lot.
+
+My dads side of the family is from Poland and my moms side is from New Zealand.
+
+I can be contacted via email at leszczynskiBen@gmail.com
+
+My favourite video game is a pirate game called Sea Of Thieves
+
+I got into spaceflight by watching a STEM streamer on Twitch called EJ_SA, he taught me about optimzing orbital transfers, supersonic retropropulsion, aerobraking and much more.
+
+I have a small titanium section from an SR-71 blackbird designated Nasa 831 (USAF 64-17956).
+
+My favourite fighter jet is the F-104 Starfighter because of it's speed and unique howling produced by it's J-79 turbojet engine and intake.
+
+One time when I visited New Zealand, I went surfing in the ocean one day and the next day I went snowboarding in the mountains.
+
+I can solve many types of rubiks style cubes; 3x3, 2x2, pyraminx and snake cube. I can't yet solve the 4x4 cube by memory yet.
+
+I'm bilingual and fluently speak English and French, I still don't enjoy french grammar rules. I once learnt to juggle for a french project too.
+
+I built my gaming pc with my dad and it booted up on the first try.
