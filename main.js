@@ -19,6 +19,8 @@ function setup() {
 
     colorMode(HSB);
 
+    textAlign(CENTER);
+
     frameRate(70);
 
     rectMode(CENTER);
@@ -29,6 +31,12 @@ function setup() {
 
 function draw() {
     background(0);
+
+    // under construction stuff
+    textSize(32);
+    fill(0, 0, 255);
+    noStroke();
+    text("Under Construction :)", width/2, 200);
 
     if (sequence == true) {
         if (frameCount % 60 == 0) {
