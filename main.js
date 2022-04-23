@@ -28,14 +28,8 @@ function setup() {
     // calculate where each tile should be on screen
     calculateTiles(rows, columns);
 
-
-    let mobileThreshold = 600;
-
-    // if the window size is small (like a mobile device) change pixel density
-    if (windowWidth < mobileThreshold || windowHeight < mobileThreshold) {
-        // setting pixel density to 1 optimzes mobile views
-        pixelDensity(1);
-    }
+    // setting pixel density to 1 optimzes mobile views
+    pixelDensity(1);
 }
 
 function draw() {
