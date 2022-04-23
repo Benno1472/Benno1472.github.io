@@ -29,7 +29,7 @@ function setup() {
     calculateTiles(rows, columns);
 
     // setting pixel density to 2 optimizes mobile views
-    console.log(pixelDensity());
+    pixelDensity(2);
 }
 
 function draw() {
