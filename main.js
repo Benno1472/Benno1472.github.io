@@ -27,6 +27,9 @@ function setup() {
 
     // calculate where each tile should be on screen
     calculateTiles(rows, columns);
+
+    // testing
+    pixelDensity(1);
 }
 
 function draw() {
