@@ -44,6 +44,21 @@ class Firework {
         }
     }
 
+    createStar(x, y, radius1, radius2, npoints) {
+        let angle = TWO_PI / npoints;
+        let halfAngle = angle / 2.0;
+        beginShape();
+        for (let a = 0; a < TWO_PI; a += angle) {
+            let sx = x + cos(a) * radius2;
+            let sy = y + sin(a) * radius2;
+            vertex(sx, sy);
+            sx = x + cos(a + halfAngle) * radius1;
+            sy = y + sin(a + halfAngle) * radius1;
+            vertex(sx, sy);
+        }
+        endShape(CLOSE);
+    }
+
     display() {
         fill(this.colour, 255, 255);
         noStroke();
@@ -51,7 +66,7 @@ class Firework {
         push();
         translate(this.position.x, this.position.y);
         rotate(this.rotationAngle);
-        rect(0, 0, 5, 15);
+        this.createStar(0, 0, 5, 13, 5);
         pop();
     }
 
@@ -67,9 +82,9 @@ class Firework {
         this.lastPoint = this.curvePoints[this.curvePoints.length - 1];
 
         if (this.lastPoint.x > width / 2) {
-            this.rotation = 0.1;
+            this.rotation = 0.07;
         } else {
-            this.rotation = -0.1;
+            this.rotation = -0.07;
         }
     }
     changeRotation() {
