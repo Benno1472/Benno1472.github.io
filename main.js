@@ -10,7 +10,7 @@ let sequence = true;
 let fireworks = [], particles = [], tiles = [], tilesAvailable = [], curves = [], facts = [];
 
 function preload() {
-    // load facts into array (only works in server environment, otherise cors error)
+    // load facts into array (only works in server environment, otherwise CORS error)
     facts = loadStrings("facts.txt");
 }
 
@@ -30,6 +30,15 @@ function setup() {
 
     // setting pixel density to 2 optimizes mobile views
     pixelDensity(2);
+
+    // truncate facts array (remove empty lines)
+    for (let i = facts.length - 1; i >= 0; i--) {
+        if (facts[i].length == 0) {
+            facts.splice(i, 1);
+        }
+    }
+
+    console.log(facts);
 }
 
 function draw() {
