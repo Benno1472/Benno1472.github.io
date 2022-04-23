@@ -28,8 +28,12 @@ function setup() {
     // calculate where each tile should be on screen
     calculateTiles(rows, columns);
 
-    // testing
-    //pixelDensity(1);
+    let resolutionThreshold = 600;
+
+    // change pixel density for 'mobile' devices (better performance because, mobile devices have highter pixel density)
+    if (width < resolutionThreshold || height < resolutionThreshold) {
+        pixelDensity(1);
+    }
 }
 
 function draw() {
@@ -39,7 +43,7 @@ function draw() {
     textSize(32);
     fill(0, 0, 255);
     noStroke();
-    text("Under Construction :)", width/2, 200);
+    text("Under Construction :)", width / 2, 200);
 
     if (sequence == true) {
         if (frameCount % 60 == 0) {
