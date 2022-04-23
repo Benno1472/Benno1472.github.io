@@ -30,7 +30,7 @@ function setup() {
 
     let resolutionThreshold = 600;
 
-    // change pixel density for 'mobile' devices (better performance because, mobile devices have highter pixel density)
+    // change pixel density for 'mobile' devices (better performance because, mobile devices have higher pixel density)
     if (width < resolutionThreshold || height < resolutionThreshold) {
         pixelDensity(1);
     }
