@@ -27,13 +27,6 @@ function setup() {
 
     // calculate where each tile should be on screen
     calculateTiles(rows, columns);
-
-    let resolutionThreshold = 600;
-
-    // change pixel density for 'mobile' devices (better performance because, mobile devices have higher pixel density)
-    if (width < resolutionThreshold || height < resolutionThreshold) {
-        pixelDensity(1);
-    }
 }
 
 function draw() {
