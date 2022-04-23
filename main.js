@@ -28,8 +28,8 @@ function setup() {
     // calculate where each tile should be on screen
     calculateTiles(rows, columns);
 
-    // setting pixel density to 1 optimzes mobile views
-    pixelDensity(1);
+    // setting pixel density to 2 optimizes mobile views
+    console.log(pixelDensity());
 }
 
 function draw() {
