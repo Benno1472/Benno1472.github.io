@@ -29,7 +29,7 @@ function setup() {
     calculateTiles(rows, columns);
 
     // testing
-    pixelDensity(1);
+    //pixelDensity(1);
 }
 
 function draw() {
