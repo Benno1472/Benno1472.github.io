@@ -82,9 +82,9 @@ class Firework {
         this.lastPoint = this.curvePoints[this.curvePoints.length - 1];
 
         if (this.lastPoint.x > width / 2) {
-            this.rotation = 0.07;
+            this.rotation = 0.1;
         } else {
-            this.rotation = -0.07;
+            this.rotation = -0.1;
         }
     }
     changeRotation() {
