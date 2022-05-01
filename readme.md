@@ -3,7 +3,7 @@
 * About Me Page
 * Projects Page
 
-#### Homepage - TODO: create branch
+#### Homepage
 * dynamic planet model that slowly moves around a "sun"
 * each planet
     * is a clickable object that redirects the user to another page
@@ -14,7 +14,7 @@
 * fireworks can't explode in the same place
 * option to show all facts
 
-#### Projects Page - TODO: create branch
+#### Projects Page
 * boids simulation where each boid links to a specific project
 * fairly slow movement and/or a pause button
 
