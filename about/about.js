@@ -366,7 +366,7 @@ class Tile {
     }
 
     methods() {
-        this.display();
+        //this.display();
     }
 
     display() {
