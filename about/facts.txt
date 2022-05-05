@@ -1,6 +1,6 @@
 My name is Benjamin Leszczynski, I'm 19 years old and enjoy programming, learning about orbital mechanics and spaceflight, watching animated movies and working-on/driving my Subaru.
 
-I'm knowledgable in several programming languages including Python, Javascript, Java and C. Recently I've been learning about Database Management Systems and experimenting with SQlite aswell as MongoDB.
+I'm knowledgable in several programming languages including Python, Javascript, Java and C. Recently I've been learning about Database Management Systems and experimenting with SQLite aswell as MongoDB.
 
 I'm currently attending the university of alberta and am working towards getting my degree in computing science.
 

@@ -7,11 +7,11 @@ let columns = 4, rows = 4;
 // boolean for controlling the sequence of simulation
 let sequence = true;
 
-let fireworks = [], particles = [], tiles = [], tilesAvailable = [], curves = [], facts = [];
+let fireworks = [], particles = [], tiles = [], rawFacts = [], facts = []
 
 function preload() {
     // load facts into array (only works in server environment, otherwise CORS error)
-    facts = loadStrings("facts.txt");
+    rawFacts = loadStrings("facts.txt");
 }
 
 function setup() {
@@ -25,20 +25,18 @@ function setup() {
 
     rectMode(CENTER);
 
-    // calculate where each tile should be on screen
-    calculateTiles(rows, columns);
-
-    // setting pixel density to 2 optimizes mobile views
+    // setting pixel density to 2 optimizes performance on mobile devices
     pixelDensity(2);
 
-    // truncate facts array (remove empty lines)
-    for (let i = facts.length - 1; i >= 0; i--) {
-        if (facts[i].length == 0) {
-            facts.splice(i, 1);
+    // remove blank lines / entries from facts array
+    for (let i = 0; i < rawFacts.length; i++) {
+        if (rawFacts[i].length != 0) {
+            facts.push(rawFacts[i]);
         }
     }
 
-    console.log(facts);
+    // calculate the tile positions depending on screen size
+    calculateTiles(rows, columns);
 }
 
 function draw() {
@@ -52,8 +50,11 @@ function draw() {
 
     if (sequence == true) {
         if (frameCount % 60 == 0) {
-            // pick a an empty tile 
+            // pick an available tile 
             tile = pickTile();
+            // set the tile status to unavailable
+            tile.setUnavailable();
+
             // pick a random position for the firework to spawn (below window)
             let pos = createVector(random(width), height);
 
@@ -62,11 +63,8 @@ function draw() {
             // create firework object 
             fireworks.push(new Firework(random(windowWidth), curvePoints));
 
-            // add the curve to the array of curves (temp)
-            curves.push(curvePoints);
-
             // check if another sequence can occur
-            if (tilesAvailable.length <= 0) {
+            if (getTilesAvailable().length <= 0) {
                 sequence = false;
             }
         }
@@ -106,28 +104,25 @@ function windowResized() {
 }
 
 function calculateTiles(rows, columns) {
-
+    // calculate tile dimensions
     let tileWidth = Math.round(width / columns);
     let tileHeight = Math.round(height / rows);
 
     for (let i = 0; i < columns; i++) {
         for (let j = 0; j < rows; j++) {
-            // compute the center position of each tile
+            // compute the center position of each tile and add tile object to tiles and tilesAvailable array
             tileCenter = createVector((i * tileWidth) + tileWidth / 2, (j * tileHeight) + tileHeight / 2);
-            // add tile object to the tiles array and tilesAvailable array
             tiles.push(new Tile(tileCenter, tileWidth, tileHeight));
-            tilesAvailable.push(new Tile(tileCenter, tileWidth, tileHeight));
         }
     }
 }
 
 function pickTile() {
-    // select a random tile
-    let selected = random(tilesAvailable);
+    // get available tiles
+    let availableTiles = getTilesAvailable();
 
-    // remove it from the array
-    let index = tilesAvailable.indexOf(selected);
-    tilesAvailable.splice(index, 1);
+    // select a random available tile
+    let selected = random(availableTiles);
 
     // return the tile
     return (selected);
@@ -148,6 +143,32 @@ function computeCurve(p1, p2) {
     }
 
     return (bezierPoints);
+}
+
+
+function pickFactData() {
+    // select random fact data
+    let selected = random(facts);
+
+    // remove it from the array
+    let index = facts.indexOf(selected);
+    facts.splice(index, 1);
+
+    // return the fact data
+    return (selected);
+}
+
+function getTilesAvailable() {
+    // returns an array of available tiles
+    let availableTiles = []
+
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].getAvailable() == true) {
+            availableTiles.push(tiles[i]);
+        }
+    }
+
+    return (availableTiles);
 }
 
 class Firework {
@@ -303,6 +324,8 @@ class Tile {
         this.tileCenter = tileCenter;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
+
+        this.available = true;
     }
 
     methods() {
@@ -320,5 +343,13 @@ class Tile {
 
     getCenter() {
         return (this.tileCenter);
+    }
+
+    getAvailable() {
+        return (this.available);
+    }
+
+    setUnavailable() {
+        this.available = false;
     }
 }
