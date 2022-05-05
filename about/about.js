@@ -46,7 +46,7 @@ function draw() {
     textSize(32);
     fill(0, 0, 255);
     noStroke();
-    text("Under Construction :)", width / 2, 200);
+    text("Under Construction :)", width / 2, 190);
 
     if (sequence == true) {
         if (frameCount % 60 == 0) {
@@ -75,11 +75,20 @@ function draw() {
         fireworks[i].methods();
 
         if (fireworks[i].checkExploded() == true) {
-            let coords = fireworks[i].getCoords();
+            let tempCoords = fireworks[i].getCoords();
+            let tempcolour = fireworks[i].getColour();
+
             for (let j = 0; j < 100; j++) {
-                particles.push(new Particle(coords.x, coords.y, random(3, 9), random(1, 5), fireworks[i].getColour()));
+                particles.push(new Particle(tempCoords.x, tempCoords.y, random(3, 9), random(1, 5), tempcolour));
             }
+
+            // remove the firework
             fireworks.splice(i, 1);
+
+            // find the closest tile
+            closestTile = findClosestTile(tempCoords);
+            // create dom element for the tile
+            closestTile.createDOM(tempcolour);
         }
     }
 
@@ -110,9 +119,12 @@ function calculateTiles(rows, columns) {
 
     for (let i = 0; i < columns; i++) {
         for (let j = 0; j < rows; j++) {
-            // compute the center position of each tile and add tile object to tiles and tilesAvailable array
+            // pick random factData
+            let factData = pickFactData();
+            // compute the center position of each tile
             tileCenter = createVector((i * tileWidth) + tileWidth / 2, (j * tileHeight) + tileHeight / 2);
-            tiles.push(new Tile(tileCenter, tileWidth, tileHeight));
+            // add tile object to tiles array
+            tiles.push(new Tile(tileCenter, tileWidth, tileHeight, factData));
         }
     }
 }
@@ -169,6 +181,29 @@ function getTilesAvailable() {
     }
 
     return (availableTiles);
+}
+
+function findClosestTile(fireworkPosition) {
+    // finds the closest tile to a given position
+
+    // set closest tile to some intial value (in this case first free tile)
+    let closestTile = tiles[0];
+
+    for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i].getShown() == false) {
+            // calculate distance between firework and closest tile 
+            let d1 = p5.Vector.dist(fireworkPosition, closestTile.getCenter());
+
+            // calculate distance between firework and current freeTile
+            let d2 = p5.Vector.dist(fireworkPosition, tiles[i].getCenter());
+
+            if (d2 < d1) {
+                closestTile = tiles[i];
+            }
+        }
+    }
+
+    return (closestTile);
 }
 
 class Firework {
@@ -320,24 +355,26 @@ class Particle {
 
 class Tile {
 
-    constructor(tileCenter, tileWidth, tileHeight) {
+    constructor(tileCenter, tileWidth, tileHeight, factData) {
         this.tileCenter = tileCenter;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
+        this.factData = factData;
 
         this.available = true;
+        this.shown = false;
     }
 
     methods() {
-        //this.display();
+        this.display();
     }
 
     display() {
         stroke(80, 255, 255);
         noFill();
-        strokeWeight(2);
-        rect(this.tileCenter.x, this.tileCenter.y, this.tileWidth - 5, this.tileHeight - 5);
-        strokeWeight(10);
+        strokeWeight(1);
+        rect(this.tileCenter.x, this.tileCenter.y, this.tileWidth, this.tileHeight);
+        strokeWeight(5);
         point(this.tileCenter.x, this.tileCenter.y);
     }
 
@@ -349,7 +386,27 @@ class Tile {
         return (this.available);
     }
 
+    getShown() {
+        return (this.shown);
+    }
+
     setUnavailable() {
         this.available = false;
+    }
+
+    createDOM(colour) {
+        let tileElement = createElement('p', this.factData);
+
+        // html
+        tileElement.style('color', `hsl(${colour}, 100%, 50%)`);
+        tileElement.size(this.tileWidth - 4, this.tileHeight - 4);
+        tileElement.position(this.tileCenter.x - (this.tileWidth / 2) + 10, this.tileCenter.y - (this.tileHeight / 2) - 6);
+
+        //css
+        tileElement.style('text-align', 'center');
+        tileElement.style('font-size', '140%');
+        //tileElement.style('background-color', 'brown');
+
+        this.shown = true;
     }
 }
