@@ -16,7 +16,10 @@
 
 #### Projects Page
 * boids simulation where each boid links to a specific project
-* fairly slow movement and/or a pause button
+* a new boid spawns in (random pos) every x amount of frames
+* hovering over a boid pauses the simulation, brings up a textbox with a project title, project description and link
+* potentially have large text that says "projects" and boids have obstacle avoidance towards that text
+* boundaries so boids stay within the screen
 
 ###### Tools
 * Use `P5.js` for creating the simulations
