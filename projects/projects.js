@@ -38,7 +38,7 @@ function draw() {
 
     // boids methods
     for (let i = 0; i < boids.length; i++) {
-        boids[i].methods();
+        boids[i].methods(boids);
     }
 }
 
@@ -47,26 +47,36 @@ function windowResized() {
 }
 
 class Boid {
-    /* Separation: steer to avoid crowding local flockmates
-       Alignment: steer towards the average heading of local flockmates
-       Cohesion: steer to move towards the average position of local flockmates */
+    // Separation: steer to avoid crowding local flockmates
+    // Cohesion: steer to move towards the average position of local flockmates
 
     constructor(position, colour) {
         this.position = position;
-        this.velocity = null;
-        this.acceleration = null;
 
-        this.colour = colour
+        this.velocity = p5.Vector.random2D();
+        this.velocity.setMag(random(1, 2));
+
+        this.acceleration = createVector();
+
+        this.colour = colour;
+
+        this.perceptionRadius = 50;
+        this.maxForce = 0.05;
+        this.maxSpeed = 2;
     }
 
-    methods() {
+    methods(boids) {
+        // alignment
+        let alignment = this.align(boids);
+        this.acceleration = alignment;
+
         this.update();
         this.display();
     }
 
     display() {
         fill(this.colour, 255, 255);
-        ellipse(this.position.x, this.position.y, 10, 10);
+        ellipse(this.position.x, this.position.y, 5, 5);
     }
 
     update() {
@@ -74,6 +84,42 @@ class Boid {
 
         this.position.add(this.velocity);
         this.velocity.add(this.acceleration);
+    }
+
+    align(boids) {
+        // comptue steering vector towards the average heading of local flockmates
+
+        let steeringForce = createVector();
+        let localBoidCount = 0;
+
+        for (let i = 0; i < boids.length; i++) {
+            // calculate distance between current boid and other boid
+            let distance = p5.Vector.dist(this.position, boids[i].getPosition());
+
+            // if the current boid can perceive the other boid
+            if (this != boids[i] && distance < this.perceptionRadius) {
+                steeringForce.add(boids[i].getVelocity());
+                localBoidCount += 1;
+            }
+        }
+
+        // average velocity (steeringForce) vector of local boids
+        if (localBoidCount > 0) {
+            steeringForce.div(localBoidCount);
+            steeringForce.setMag(this.maxSpeed);
+            steeringForce.sub(this.velocity);
+            steeringForce.limit(this.maxForce);
+        }
+
+        return (steeringForce);
+    }
+
+    getPosition() {
+        return (this.position);
+    }
+
+    getVelocity() {
+        return (this.velocity);
     }
 
 } 
