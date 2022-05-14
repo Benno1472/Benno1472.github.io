@@ -67,8 +67,8 @@ class Boid {
 
     methods(boids) {
         // alignment
-        let alignment = this.align(boids);
-        this.acceleration = alignment;
+        //let alignment = this.align(boids);
+        //this.acceleration = alignment;
 
         this.update();
         this.display();
