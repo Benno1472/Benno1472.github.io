@@ -15,7 +15,7 @@ function setup() {
     pixelDensity(2);
 
     // spawn boids
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 10; i++) {
         // compute random position vector
         let pos = createVector(random(width), random(height));
         // compute colour
@@ -59,6 +59,7 @@ class Boid {
         this.acceleration = createVector();
 
         this.colour = colour;
+        this.triangleSize = 15;
 
         this.perceptionRadius = 50;
         this.maxForce = 0.05;
@@ -75,8 +76,15 @@ class Boid {
     }
 
     display() {
-        fill(this.colour, 255, 255);
-        ellipse(this.position.x, this.position.y, 5, 5);
+        noFill();
+        stroke(this.colour, 255, 255);
+
+        // display boid as a triangle in velocity vector direction
+        push();
+        translate(this.position.x, this.position.y);
+        rotate(this.velocity.heading() - radians(90));
+        triangle(0, 0, this.triangleSize, 0, this.triangleSize / 2, this.triangleSize * 1.2);
+        pop();
     }
 
     update() {
